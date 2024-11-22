@@ -1,0 +1,5 @@
+Django>=4.0,<5.0
+djangorestframework>=3.14,<4.0
+PyPDF2>=3.0.0
+python-docx>=0.8.11
+reportlab>=3.6.0
