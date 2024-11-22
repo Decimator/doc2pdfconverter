@@ -39,7 +39,7 @@ jobs:
 
       # Step 5: Tag the Docker image
       - name: Tag Docker image
-        run: docker tag doc-to-pdf-web:latest decimator1/django-converter:latest
+        run: docker tag doc_to_pdf-web:latest decimator1/django-converter:latest
 
       # Step 6: Push the Docker image to Docker Hub
       - name: Push Docker image
