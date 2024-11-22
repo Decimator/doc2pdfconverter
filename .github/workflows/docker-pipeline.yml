@@ -26,15 +26,12 @@ jobs:
 
       # Step 3: Build the Docker image
       - name: Build Docker image
-        run: docker-compose build
+        run: docker-compose -f doc_to_pdf/docker-compose.yml build
 
-     
-
-      # Step 5: Tag the Docker image
+      # Step 4: Tag the Docker image
       - name: Tag Docker image
-        run: docker tag django_converter_app:latest your-dockerhub-username/django-converter:latest
+        run: docker tag django_converter_app:latest decimator1/django-converter:latest
 
-      # Step 6: Push the Docker image to Docker Hub
+      # Step 5: Push the Docker image to Docker Hub
       - name: Push Docker image
         run: docker push decimator1/django-converter:latest
-
