@@ -10,10 +10,10 @@ from .serializer import DocxUploadSerializer
 from PyPDF2 import PdfWriter, PdfReader
 from io import BytesIO
 
-from django.utils.timezone import now  # To get current time
+from django.utils.timezone import now  
 
 def docx_to_pdf_view(request):
-    metadata = {}  # Dictionary to store file metadata
+    metadata = {} 
 
     if request.method == 'POST':
         form = DocxUploadForm(request.POST, request.FILES)
@@ -21,20 +21,20 @@ def docx_to_pdf_view(request):
             docx_file = request.FILES['docx_file']
             pdf_password = request.POST.get('pdf_password', '')
 
-            # Extract metadata
+            
             metadata['file_name'] = docx_file.name
             metadata['file_size'] = docx_file.size
-            metadata['uploaded_at'] = now().strftime("%Y-%m-%d %H:%M:%S")  # Current timestamp
+            metadata['uploaded_at'] = now().strftime("%Y-%m-%d %H:%M:%S")  
 
             try:
-                # Convert DOCX to PDF
+               
                 pdf_buffer = convert_docx_to_pdf(docx_file)
 
-                # Add password protection if a password is provided
+                
                 if pdf_password:
                     pdf_buffer = add_pdf_password(pdf_buffer, pdf_password)
 
-                # Serve the PDF as a file response
+               
                 return FileResponse(
                     pdf_buffer,
                     as_attachment=True,
