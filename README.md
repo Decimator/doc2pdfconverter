@@ -60,9 +60,3 @@ This project is an offline assignment to create a web application that processes
 - [Docker](https://www.docker.com/)
 - [Git](https://git-scm.com/)
 
-### Steps
-
-1. **Clone the Repository**
-   ```bash
-   git clone <repo-url>
-   cd <repo-name>
