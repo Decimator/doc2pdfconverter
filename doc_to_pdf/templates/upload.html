@@ -97,7 +97,7 @@
 
 {% block extra_js %}
 <script>
-// Function to format file size
+
 function formatFileSize(bytes) {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
@@ -106,33 +106,32 @@ function formatFileSize(bytes) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 
-// Function to format current date and time
 function formatDate() {
     const now = new Date();
     return now.toLocaleString();
 }
 
-// Function to reset submit button
+
 function resetSubmitButton() {
     const submitBtn = document.getElementById('submitBtn');
     submitBtn.disabled = false;
     submitBtn.innerHTML = 'Convert to PDF';
 }
 
-// Handle file selection
+
 document.getElementById('docx_file').addEventListener('change', function(e) {
     const metadataSection = document.getElementById('metadataSection');
     const fileName = document.getElementById('fileName');
     const fileSize = document.getElementById('fileSize');
     const uploadDate = document.getElementById('uploadDate');
 
-    // Reset submit button if it was in converting state
+    
     resetSubmitButton();
 
     if (this.files && this.files[0]) {
         const file = this.files[0];
         
-        // Display metadata
+        
         metadataSection.style.display = 'block';
         fileName.textContent = file.name;
         fileSize.textContent = formatFileSize(file.size);
@@ -142,7 +141,7 @@ document.getElementById('docx_file').addEventListener('change', function(e) {
     }
 });
 
-// Handle form submission
+
 document.getElementById('uploadForm').addEventListener('submit', function(e) {
     const submitBtn = document.getElementById('submitBtn');
     submitBtn.disabled = true;
@@ -151,25 +150,25 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
         Converting...
     `;
 
-    // Reset button after a short delay to allow download to start
+   
     setTimeout(() => {
         resetSubmitButton();
-        // Clear the file input
+        
         document.getElementById('docx_file').value = '';
-        // Hide metadata section
+        
         document.getElementById('metadataSection').style.display = 'none';
-        // Clear password field if exists
+        
         const passwordField = document.getElementById('pdf_password');
         if (passwordField) passwordField.value = '';
-    }, 2000); // 2 second delay
+    }, 2000); 
 });
 
-// Reset button on page load (in case of back navigation)
+
 document.addEventListener('DOMContentLoaded', function() {
     resetSubmitButton();
 });
 
-// Reset button if there was an error
+
 if (document.querySelector('.alert-danger')) {
     resetSubmitButton();
 }
