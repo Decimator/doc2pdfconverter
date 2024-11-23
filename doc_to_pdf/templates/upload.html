@@ -112,12 +112,22 @@ function formatDate() {
     return now.toLocaleString();
 }
 
+// Function to reset submit button
+function resetSubmitButton() {
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Convert to PDF';
+}
+
 // Handle file selection
 document.getElementById('docx_file').addEventListener('change', function(e) {
     const metadataSection = document.getElementById('metadataSection');
     const fileName = document.getElementById('fileName');
     const fileSize = document.getElementById('fileSize');
     const uploadDate = document.getElementById('uploadDate');
+
+    // Reset submit button if it was in converting state
+    resetSubmitButton();
 
     if (this.files && this.files[0]) {
         const file = this.files[0];
@@ -133,13 +143,35 @@ document.getElementById('docx_file').addEventListener('change', function(e) {
 });
 
 // Handle form submission
-document.getElementById('uploadForm').addEventListener('submit', function() {
+document.getElementById('uploadForm').addEventListener('submit', function(e) {
     const submitBtn = document.getElementById('submitBtn');
     submitBtn.disabled = true;
     submitBtn.innerHTML = `
         <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
         Converting...
     `;
+
+    // Reset button after a short delay to allow download to start
+    setTimeout(() => {
+        resetSubmitButton();
+        // Clear the file input
+        document.getElementById('docx_file').value = '';
+        // Hide metadata section
+        document.getElementById('metadataSection').style.display = 'none';
+        // Clear password field if exists
+        const passwordField = document.getElementById('pdf_password');
+        if (passwordField) passwordField.value = '';
+    }, 2000); // 2 second delay
 });
+
+// Reset button on page load (in case of back navigation)
+document.addEventListener('DOMContentLoaded', function() {
+    resetSubmitButton();
+});
+
+// Reset button if there was an error
+if (document.querySelector('.alert-danger')) {
+    resetSubmitButton();
+}
 </script>
 {% endblock %}
