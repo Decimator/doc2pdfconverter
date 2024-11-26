@@ -1,4 +1,4 @@
-# RapidFort Assignment
+
 
 ### Project Overview
 This project is an offline assignment to create a web application that processes Word documents (.docx) and converts them to PDF. The user can upload a .docx file, view its metadata, and download the converted PDF.
